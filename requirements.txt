@@ -1,1 +1,15 @@
 psycopg2-binary
+numpy
+librosa
+torch
+torchaudio
+transformers
+huggingface_hub
+tensorflow
+tensorflow-hub
+psycopg2-binary
+pytest
+langchain
+langchain-openai
+langgraph
+deepagents
