@@ -7,10 +7,10 @@ transformers
 huggingface_hub
 tensorflow
 tensorflow-hub
-psycopg2-binary
 pytest
 pytest-asyncio
 langchain
 langchain-openai
 langgraph
 deepagents
+fastapi

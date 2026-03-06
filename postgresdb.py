@@ -126,3 +126,69 @@ def insert_audiotriggers(conn, audiotriggers):
     conn.commit()
     return audiotrigger_id
 
+def create_ouradaily_table(conn):
+    cur = conn.cursor()
+    cur.execute(
+        """
+    CREATE TABLE IF NOT EXISTS oura_daily_data (
+        id TEXT PRIMARY KEY,
+        average_heart_rate DOUBLE PRECISION,
+        average_hrv DOUBLE PRECISION,
+        hrv_interval DOUBLE PRECISION,
+        deep_sleep_duration DOUBLE PRECISION,
+        light_sleep_duration DOUBLE PRECISION,
+        rem_sleep_duration DOUBLE PRECISION,
+        total_sleep_duration DOUBLE PRECISION,
+        body_temperature DOUBLE PRECISION,
+        resting_heart_rate DOUBLE PRECISION,
+        hrv_balance DOUBLE PRECISION,
+        sleep_balance DOUBLE PRECISION,
+        sleep_regularity DOUBLE PRECISION,
+        readiness_score DOUBLE PRECISION     
+                )           
+        """)
+    conn.commit()
+    
+def insert_ouradaily(conn, flat_data):
+    cur = conn.cursor()
+
+    for data in flat_data:
+        cur.execute(
+            """
+            INSERT INTO oura_daily_data (
+                id,
+                average_heart_rate,
+                average_hrv,
+                hrv_interval,
+                deep_sleep_duration,
+                light_sleep_duration,
+                rem_sleep_duration,
+                total_sleep_duration,
+                body_temperature,
+                resting_heart_rate,
+                hrv_balance,
+                sleep_balance,
+                sleep_regularity,
+                readiness_score
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ON CONFLICT (id) DO NOTHING         
+            """, 
+            (
+                data["id"],
+                data["average_heart_rate"],
+                data["average_hrv"],
+                data["hrv_interval"],
+                data["deep_sleep_duration"],
+                data["light_sleep_duration"],
+                data["rem_sleep_duration"],
+                data["total_sleep_duration"],
+                data["body_temperature"],
+                data["resting_heart_rate"],
+                data["hrv_balance"],
+                data["sleep_balance"],
+                data["sleep_regularity"],
+                data["readiness_score"]
+            )
+        )
+    conn.commit()
+

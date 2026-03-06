@@ -37,18 +37,4 @@ async def test_token_exchange():
         mock_asyncclient.assert_awaited_once_with(mock_asyncclient.return_value.__aenter__.return_value)
         mock_asyncclient.return_value.__aenter__.return_value.post.assert_awaited_once_with("testdummy4", data=dummydata)
     
-
-
-
-# must mock httpx.AsyncClient
-# to test 3 below things
-# 1. success case1
-# Simulate:
-# 	•	client.post() returns fake response
-# 	•	raise_for_status() does nothing
-# 	•	json() returns fake token dict
-# 2. HTTPStatus Error case
-# Simulate:
-# 	•	raise_for_status() throws HTTPStatusError
-#       then asssert if the function raises ValueError
-# 3 Repeat the 2 for Request error case.
+# Test complete
