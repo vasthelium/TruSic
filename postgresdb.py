@@ -132,6 +132,7 @@ def create_ouradaily_table(conn):
         """
     CREATE TABLE IF NOT EXISTS oura_daily_data (
         id TEXT PRIMARY KEY,
+        day DATE,
         average_heart_rate DOUBLE PRECISION,
         average_hrv DOUBLE PRECISION,
         hrv_interval DOUBLE PRECISION,
@@ -157,6 +158,7 @@ def insert_ouradaily(conn, flat_data):
             """
             INSERT INTO oura_daily_data (
                 id,
+                day,
                 average_heart_rate,
                 average_hrv,
                 hrv_interval,
@@ -170,11 +172,12 @@ def insert_ouradaily(conn, flat_data):
                 sleep_balance,
                 sleep_regularity,
                 readiness_score
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (id) DO NOTHING         
             """, 
             (
                 data["id"],
+                data["day"],
                 data["average_heart_rate"],
                 data["average_hrv"],
                 data["hrv_interval"],

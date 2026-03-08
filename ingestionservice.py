@@ -8,8 +8,16 @@ from datetime import date, timedelta
 from postgresdb import pgconnect, create_ouradaily_table, insert_ouradaily
 
 #config
-OURA_ACCESS_TOKEN = os.getenv("OURA_ACCESS_TOKEN", "")
+TOKENS_PATH = ".tokens/oura_tokens.json"
+
 def fetch_oura():
+    if os.path.exists(TOKENS_PATH):
+        with open(TOKENS_PATH, "r") as r:
+            data = json.load(r)
+            OURA_ACCESS_TOKEN = data.get("access_token")
+    else:
+        OURA_ACCESS_TOKEN = os.getenv("OURA_ACCESS_TOKEN", "")
+
     if not OURA_ACCESS_TOKEN:
         raise ValueError("Oura access Token missing")
     
@@ -36,6 +44,7 @@ def flatten_oura(raw_data: dict):
     for data in raw_data.get("data", []):
         #some direct fields
         id = data["id"]
+        day = data["day"]
         average_heart_rate = data["average_heart_rate"]
         deep_sleep_duration = data["deep_sleep_duration"]
         light_sleep_duration = data["light_sleep_duration"]
@@ -43,7 +52,8 @@ def flatten_oura(raw_data: dict):
         total_sleep_duration = data["total_sleep_duration"]
         average_hrv = data["average_hrv"]
         #nested HRV
-        hrv_interval = data.get("hrv", {}).get("interval")
+        #hrv_interval = data.get("hrv", {}).get("interval") - Atrribute error 
+        hrv_interval = (data.get("hrv") or {}).get("interval")
 
         #nested readiness
         body_temperature = data.get("readiness", {}).get("contributors", {}).get("body_temperature")
@@ -55,6 +65,7 @@ def flatten_oura(raw_data: dict):
 
         flat_data = {
             "id": id,
+            "day": day,
             "average_heart_rate": average_heart_rate,
             "average_hrv": average_hrv,
             "hrv_interval": hrv_interval,
@@ -82,3 +93,7 @@ def upsrt_oura():
     insert_ouradaily(conn, flattened_data)
 
     conn.close()
+    print ("DB Write completed")
+
+if __name__ == "__main__":
+    upsrt_oura()
