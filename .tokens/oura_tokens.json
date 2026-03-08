@@ -1,8 +1,0 @@
-{
-  "access_token": "_0XBPWQQ_4d8f6250-3174-48c6-8d12-0cd8a5d080fb",
-  "token_type": "bearer",
-  "expires_in": 2591999,
-  "id_token": null,
-  "scope": "extapi:personal extapi:heartrate extapi:session extapi:heart_health extapi:daily extapi:workout extapi:stress",
-  "refresh_token": "_1XBPWQQ_bccfcb98-c688-4820-90dc-20dce4927623"
-}
