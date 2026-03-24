@@ -1,17 +1,17 @@
 import pytest
-from ingestionservice import fetch_oura
+from H3_ingestionservice import fetch_oura
 from unittest.mock import patch
-import ingestionservice
+import H3_ingestionservice
 
 # tests check if oura-access-token is empty,. token response is recieved, get url contains what needed
 
 def test_valueerror_fetchoura():
-    ingestionservice.OURA_ACCESS_TOKEN = " "
+    H3_ingestionservice.OURA_ACCESS_TOKEN = " "
     with pytest.raises(ValueError):
         fetch_oura()
 
 def test_response_check():
-    ingestionservice.OURA_ACCESS_TOKEN = "somedummytoken"
+    H3_ingestionservice.OURA_ACCESS_TOKEN = "somedummytoken"
     fake_tokenpayload = {"somekeys": "somevalues"}
 
     with patch("ingestionservice.httpx.Client") as mock_client:
@@ -22,11 +22,11 @@ def test_response_check():
             def json(*args, **kwds):
                 return fake_tokenpayload
         mock_client.return_value.__enter__.return_value.get.return_value = FakeResponse()
-        result = ingestionservice.fetch_oura()
+        result = H3_ingestionservice.fetch_oura()
         assert result == fake_tokenpayload
 
 def test_geturl():
-    ingestionservice.OURA_ACCESS_TOKEN = "somedummytoken"
+    H3_ingestionservice.OURA_ACCESS_TOKEN = "somedummytoken"
     fake_tokenpayload = {"somekeys": "somevalues"}
     with patch("ingestionservice.httpx.Client") as mock_client:
         class FakeResponse:
@@ -36,7 +36,7 @@ def test_geturl():
             def json(*args, **kwds):
                 return fake_tokenpayload
         mock_client.return_value.__enter__.return_value.get.return_value = FakeResponse()
-        result = ingestionservice.fetch_oura()
+        result = H3_ingestionservice.fetch_oura()
         args, kwargs = mock_client.return_value.__enter__.return_value.get.call_args
         cur_url = args[0]
         headers = kwargs["headers"]

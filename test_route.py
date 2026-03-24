@@ -1,9 +1,9 @@
 import pytest
-from authservice import OuraAuthService
+from H1_authservice import OuraAuthService
 from unittest.mock import patch
 from fastapi.testclient import TestClient
-from route import app
-import route
+from H2_route import app
+import H2_route
 
 client = TestClient(app)
 
@@ -22,7 +22,7 @@ def test_callback():
     with patch("route.authservice.exchange_code_for_token") as mock_exchangetoken, \
         patch("route.authservice.save_tokens") as mock_savetokens:
         mock_exchangetoken.return_value = {"access_token": "abc"}
-        route.stored_state = "dummystate"
+        H2_route.stored_state = "dummystate"
         callback = client.get("/callback?code=dummycode&state=dummystate")
         mock_exchangetoken.assert_called_once_with("dummycode")
         mock_savetokens.assert_called_once_with({"access_token": "abc"})

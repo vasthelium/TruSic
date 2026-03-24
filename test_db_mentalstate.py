@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import patch
 from unittest.mock import MagicMock
-from postgresdb import read_oura_daily_data
+from db_repository import read_oura_daily_data
 
 # this function does
 # cursor() → execute(SQL) → fetchone() → convert tuple → dict

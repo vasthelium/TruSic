@@ -1,5 +1,5 @@
 import pytest
-from authservice import OuraAuthService
+from H1_authservice import OuraAuthService
 from unittest.mock import patch
 
 client_id = "testdummy1"
