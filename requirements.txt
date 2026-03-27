@@ -14,3 +14,4 @@ langchain-openai
 langgraph
 deepagents
 fastapi
+scikit-learn
