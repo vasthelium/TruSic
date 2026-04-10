@@ -31,8 +31,3 @@ def load_audio():
             )
     return towave
     print(file, y_tensor.shape, sr)#debug line
-    
-
-
-
-

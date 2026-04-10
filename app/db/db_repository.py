@@ -1,36 +1,38 @@
 import psycopg2
 import os
+from psycopg2 import pool
+from textwrap import dedent
+
+dsn = os.getenv("DATABASE_URL")
+if not dsn:
+    raise ValueError("DB URL not set in this terminal")
+connection_pool = pool.SimpleConnectionPool(1, 10, dsn)
 
 def pgconnect():
-    dsn = os.getenv("DATABASE_URL")
-    if not dsn:
-        raise ValueError("DB URL not set in this terminal")
-    return psycopg2.connect(dsn)
+    return connection_pool.getconn()
 
 def init_db(conn):
-    cur = conn.cursor()
-    cur.execute("""
-    CREATE EXTENSION IF NOT EXISTS vector;
-    """)
-    conn.commit()
+    with conn.cursor() as cur:
+        cur.execute(dedent("""
+        CREATE EXTENSION IF NOT EXISTS vector;
+        """))
 
 def create_audiotriggers_tables(conn):
-    cur = conn.cursor()
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS trusic_audio_triggers (
-        id SERIAL PRIMARY KEY,                 
-        created_at TIMESTAMPTZ DEFAULT now(),  
-        type TEXT,                             
-        song_identity TEXT,                                  
-        trigger_embedding vector(512)         
+    with conn.cursor() as cur:
+        cur.execute(dedent("""
+        CREATE TABLE IF NOT EXISTS trusic_audio_triggers (
+            id SERIAL PRIMARY KEY,                 
+            created_at TIMESTAMPTZ DEFAULT now(),  
+            type TEXT,                             
+            song_identity TEXT,                                  
+            trigger_embedding vector(512)         
         )
-    """)
+        """))
     print("Tables ensured.")
-    conn.commit()
 
 def insert_audiotriggers(conn, audiotriggers):
-    cur = conn.cursor()
-    cur.execute("""
+    with conn.cursor() as cur:
+        cur.execute(dedent("""
         INSERT INTO trusic_audio_triggers (
             type,
             song_identity,
@@ -38,7 +40,8 @@ def insert_audiotriggers(conn, audiotriggers):
         )
         VALUES (%s, %s, %s)
         RETURNING id;
-    """, (
+        """), 
+        (
         audiotriggers["type"],
         audiotriggers["song_identity"],      
         audiotriggers["trigger_embedding"]         
@@ -48,8 +51,8 @@ def insert_audiotriggers(conn, audiotriggers):
     return audiotrigger_id
 
 def create_ouradaily_table(conn):
-    cur = conn.cursor()
-    cur.execute(
+    with conn.cursor() as cur:
+        cur.execute(dedent(
         """
     CREATE TABLE IF NOT EXISTS oura_daily_data (
         id TEXT PRIMARY KEY,
@@ -68,14 +71,12 @@ def create_ouradaily_table(conn):
         sleep_regularity DOUBLE PRECISION,
         readiness_score DOUBLE PRECISION     
                 )           
-        """)
-    conn.commit()
+        """))
     
 def insert_ouradaily(conn, flat_data):
-    cur = conn.cursor()
-
-    for data in flat_data:
-        cur.execute(
+    with conn.cursor() as cur:
+        for data in flat_data:
+            cur.execute(dedent(
             """
             INSERT INTO oura_daily_data (
                 id,
@@ -95,7 +96,7 @@ def insert_ouradaily(conn, flat_data):
                 readiness_score
             ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (id) DO NOTHING         
-            """, 
+            """), 
             (
                 data["id"],
                 data["day"],
@@ -116,17 +117,17 @@ def insert_ouradaily(conn, flat_data):
         )
 
 def read_oura_daily_data(conn):
-    curs = conn.cursor()
-    curs.execute("""
+    with conn.cursor() as cur:
+        cur.execute(dedent("""
             SELECT day, readiness_score,
             total_sleep_duration, average_hrv,
             resting_heart_rate
             FROM oura_daily_data
             ORDER BY day DESC
             LIMIT 1
-        """
+        """)
         )
-    row = curs.fetchone()
+        row = cur.fetchone()
     if not row:
         return None
     return{
@@ -138,21 +139,20 @@ def read_oura_daily_data(conn):
         }
 
 def read_audio_triggers(conn):
-    curs = conn.cursor()
-    curs.execute("""
+    with conn.cursor() as cur:
+        cur.execute(dedent("""
             SELECT song_identity
             FROM trusic_audio_triggers
             ORDER BY created_at DESC
-        """
-        )
-    row = curs.fetchall()
+        """))
+        row = cur.fetchall()
     if not row:
         return None
     return row
     
 def create_state_trigger_table(conn):
-    cur = conn.cursor()
-    cur.execute("""
+    with conn.cursor() as cur:
+        cur.execute(dedent("""
     CREATE TABLE IF NOT EXISTS trusicstate_triggers (
         id SERIAL PRIMARY KEY,                 
         created_at TIMESTAMPTZ DEFAULT now(),  
@@ -161,14 +161,13 @@ def create_state_trigger_table(conn):
         trigger_activity TEXT,                 
         trigger_drive TEXT,                     
         stateembedding vector(512)
-    )
-    """)
+        )
+    """))
     print("Tables ensured.")
-    conn.commit()
 
 def insert_state_triggers(conn, state_triggers):
-    cur = conn.cursor()
-    cur.execute("""
+    with conn.cursor() as cur:
+        cur.execute(dedent("""
         INSERT INTO trusicstate_triggers (
             type,
             song_identity,
@@ -178,7 +177,7 @@ def insert_state_triggers(conn, state_triggers):
         )
         VALUES (%s, %s, %s, %s, %s)
         RETURNING id;
-    """, (
+    """), (
         state_triggers["type"],
         state_triggers["song_identity"],
         state_triggers["trigger_activity"],        

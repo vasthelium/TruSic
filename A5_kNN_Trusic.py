@@ -1,9 +1,10 @@
-from db_repository import pgconnect
-from H5_trigger_states import mlp
+from app.db.db_repository import pgconnect
+#from H5_trigger_states import mlp
+from Learn import newmlp
 import numpy as np
 
 def trusic_NN():
-    mlpvec = mlp()
+    mlpvec = newmlp()
     conn = pgconnect()
     cur = conn.cursor()
 

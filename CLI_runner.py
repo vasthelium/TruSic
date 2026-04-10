@@ -1,4 +1,4 @@
-from db_service_human import upsrt_oura, sendstatetriggersdb
+from app.db.db_service_human import upsrt_oura, sendstatetriggersdb
 from A5_kNN_Trusic import trusic_NN
 import argparse
 from H5_trigger_states import build_statetriggers

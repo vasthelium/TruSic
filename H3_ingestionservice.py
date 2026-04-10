@@ -5,7 +5,7 @@ import json
 import httpx
 #need import from postgres for tables and upsert here. 
 from datetime import date, timedelta
-from db_repository import pgconnect, create_ouradaily_table, insert_ouradaily
+from app.db.db_repository import pgconnect, create_ouradaily_table, insert_ouradaily
 
 #config
 TOKENS_PATH = ".tokens/oura_tokens.json"

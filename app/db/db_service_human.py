@@ -1,7 +1,7 @@
-from db_repository import (
+from app.db.db_repository import (
 pgconnect, init_db,
 create_ouradaily_table, insert_ouradaily, create_state_trigger_table, 
-insert_state_triggers, read_oura_daily_data)
+insert_state_triggers, read_oura_daily_data, connection_pool)
 from H3_ingestionservice import fetch_oura, flatten_oura
 
 def read_ouradata():
@@ -9,7 +9,7 @@ def read_ouradata():
     try:
         oura_data = read_oura_daily_data(conn)
     finally:
-        conn.close()
+        connection_pool.putconn(conn)
     return oura_data
 
 def upsrt_oura():
@@ -22,7 +22,7 @@ def upsrt_oura():
         insert_ouradaily(conn, flattened_data)
         conn.commit()
     finally:
-        conn.close()
+        connection_pool.putconn(conn)
     print ("DB Write completed")
 
 #below function needs to be rewritten for new table. 
@@ -35,5 +35,5 @@ def sendstatetriggersdb(statetriggers):
             insert_state_triggers(conn, trigger)
         conn.commit()
     finally:
-        conn.close()
+        connection_pool.putconn(conn)
 

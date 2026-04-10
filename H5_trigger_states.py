@@ -1,10 +1,11 @@
 import os
 import shutil
-from A2_privacy_killswitch import privacy_switch
-from A3_classify import classify
-from db_service_human import read_ouradata
-from db_service_audio import read_songdata
+from app.services.A2_privacy_killswitch import privacy_switch
+from app.services.A3_classify import classify
+from app.db.db_service_human import read_ouradata
+from app.db.db_service_audio import read_songdata
 from huggingface_hub import InferenceClient
+from Learn import newmlp
 import numpy as np
 
 #config
@@ -192,7 +193,7 @@ def pair_statetriggers(features_list, Z2):
 
 def build_statetriggers():
     features_list = create_features()
-    Z2 = mlp()
+    Z2 = newmlp()
     statetriggers = pair_statetriggers(features_list, Z2)
     return statetriggers
 

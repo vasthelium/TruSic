@@ -1,6 +1,6 @@
-from db_repository import (
+from app.db.db_repository import (
 pgconnect, init_db, create_audiotriggers_tables,
-insert_audiotriggers, read_audio_triggers)
+insert_audiotriggers, read_audio_triggers, connection_pool)
 
 def sendaudiotodb(embedded_f):
     conn = pgconnect()
@@ -18,7 +18,7 @@ def sendaudiotodb(embedded_f):
             print(f"Inserted: {audiotriggers['filename']}")
         conn.commit()
     finally:
-        conn.close()
+        connection_pool.putconn(conn)
     print("DB write complete.")
 
 def read_songdata():
@@ -26,5 +26,5 @@ def read_songdata():
     try:
         song_data= read_audio_triggers(conn)
     finally:
-        conn.close()
+        connection_pool.putconn(conn)
     return song_data

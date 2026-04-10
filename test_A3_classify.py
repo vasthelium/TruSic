@@ -1,5 +1,5 @@
 import pytest
-from A3_classify import classify
+from app.services.A3_classify import classify
 from unittest.mock import patch
 import numpy as np
 
