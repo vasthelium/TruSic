@@ -2,7 +2,7 @@ from sklearn.model_selection import train_test_split #function takes full datase
 from sklearn.preprocessing import StandardScaler #class for scaling stats from training data
 from sklearn.linear_model import LinearRegression #this is a regression model
 from sklearn.ensemble import RandomForestClassifier #class - object created from it learns(fit) and predicts
-from H5_trigger_states import mlpfunc, numerical_features
+from app.services.H5_trigger_states import mlpfunc, numerical_features
 import numpy as np
 import random
 

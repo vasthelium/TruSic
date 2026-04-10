@@ -1,7 +1,7 @@
 import os
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse, JSONResponse
-from H1_authservice import OuraAuthService
+from app.ingestion.H1_authservice import OuraAuthService
 
 app = FastAPI()
 #Config (KEEP SECRETS OUT OF GIT)

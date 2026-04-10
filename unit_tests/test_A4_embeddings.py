@@ -1,5 +1,5 @@
 import pytest
-from app.services.A4_embeddinglayer import device, embed
+from app.ml.embeddings.A4_embeddinglayer import device, embed
 import torch
 
 def test_clap_embedding_dims():

@@ -1,7 +1,7 @@
 from app.db.db_service_human import upsrt_oura, sendstatetriggersdb
-from A5_kNN_Trusic import trusic_NN
+from app.services.A5_kNN_Trusic import trusic_NN
 import argparse
-from H5_trigger_states import build_statetriggers
+from app.services.H5_trigger_states import build_statetriggers
 
 def main(args):
     if args.mode == "oura":

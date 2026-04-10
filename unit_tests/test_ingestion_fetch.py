@@ -1,7 +1,7 @@
 import pytest
-from H3_ingestionservice import fetch_oura
+from app.ingestion.H3_ingestionservice import fetch_oura
 from unittest.mock import patch
-import H3_ingestionservice
+import app.ingestion.H3_ingestionservice as H3_ingestionservice
 
 # tests check if oura-access-token is empty,. token response is recieved, get url contains what needed
 

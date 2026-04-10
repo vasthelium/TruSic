@@ -1,9 +1,9 @@
 import pytest
-from H1_authservice import OuraAuthService
+from app.ingestion.H1_authservice import OuraAuthService
 from unittest.mock import patch
 from fastapi.testclient import TestClient
-from H2_route import app
-import H2_route
+from app.ingestion.H2_route import app
+import app.ingestion.H2_route as H2_route
 
 client = TestClient(app)
 

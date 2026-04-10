@@ -1,4 +1,4 @@
-from H5_trigger_states import (mlpfunc,numerical_features)
+from app.services.H5_trigger_states import (mlpfunc,numerical_features)
 import numpy as np
 import random
 

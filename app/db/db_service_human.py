@@ -2,7 +2,7 @@ from app.db.db_repository import (
 pgconnect, init_db,
 create_ouradaily_table, insert_ouradaily, create_state_trigger_table, 
 insert_state_triggers, read_oura_daily_data, connection_pool)
-from H3_ingestionservice import fetch_oura, flatten_oura
+from app.ingestion.H3_ingestionservice import fetch_oura, flatten_oura
 
 def read_ouradata():
     conn = pgconnect()

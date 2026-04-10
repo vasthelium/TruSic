@@ -5,7 +5,7 @@ from app.services.A3_classify import classify
 from app.db.db_service_human import read_ouradata
 from app.db.db_service_audio import read_songdata
 from huggingface_hub import InferenceClient
-from Learn import newmlp
+from app.ml.models.Learn import newmlp
 import numpy as np
 
 #config
