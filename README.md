@@ -84,7 +84,7 @@ This structure allows:
 - easy iteration on ML vs system layers
 - visibility into how triggers are formed
 
-## REFERENCES LEARNING
+## 📚 REFERENCES / LEARNING
 This project is shaped by: 
 - Deep Learning  — Goodfellow, Bengio, Courville
 - Hands-On Machine Learning — Aurélien Géron
@@ -99,13 +99,13 @@ Multi Layer Perceptropn are intentionally kept simple / abstract for now.
 Focus is on: getting the idea working first, then refining it
 
 ## FUTURE ROADMAP
-    • move from manual → real trigger capture (UI / passive / voice)  
-    • add audio recording (hums / voice) inside the app (currently manual file placement)  
-    • refine learning loop using behavioral signals (skip / replay / duration)  
-    • transition from simulated signals → real user interaction data  
-    • improve embedding quality and trigger–state associations  
-    • deepen integration of mental state into retrieval + learning  
-    • build a simple interface for real-time interaction
+- move from manual → real trigger capture (UI / passive / voice)  
+- add audio recording (hums / voice) inside the app (currently manual file placement)  
+- refine learning loop using behavioral signals (skip / replay / duration)  
+- transition from simulated signals → real user interaction data  
+- improve embedding quality and trigger–state associations  
+- deepen integration of mental state into retrieval + learning  
+- build a simple interface for real-time interaction
 
 Closing Thought..
 Music feels right not because it matches taste, but because it matches a moment.
