@@ -35,7 +35,7 @@ Current flow:
 
 In parallel:
 - Basic mental / physiological state is derived from wearable data
-- Currently integrated with Oura (Aura)
+- Currently integrated with Oura (Wearable data)
 - Designed to be vendor-agnostic (expandable to other wearables)
 Current usage is self-experimental (single-user system)
 
