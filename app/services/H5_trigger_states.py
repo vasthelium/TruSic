@@ -32,7 +32,7 @@ def healthstat():
 
 #triggers from file
 def read_triggers():
-    trigger_file = "/Users/zameer/Obsidian Vault/ProJect Trusic/musictriggers.md"
+    trigger_file = "data/trusic_triggers.md"
     
     if os.path.exists(trigger_file):
         with open(trigger_file, "r") as f:
