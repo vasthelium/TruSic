@@ -14,7 +14,8 @@ We Sometimes:
 This project starts from a simple observation:
 Music is often recalled from biographical memory, not preference.
 MEAM - Musically Evoked Autobiographical Memory - LOL #Meme of this #MEAM
-- Read the thinking behind this [Medium link here]
+- [Read the thinking behind this on Medium] (https://medium.com/@techiezameer.m/trusic-playing-what-you-feel-not-what-you-usually-play-436870da0cd4)
+
 
 TruSic explores:
 **Can we play the song closest to what a person is feeling right now?*
