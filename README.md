@@ -14,6 +14,7 @@ We Sometimes:
 This project starts from a simple observation:
 Music is often recalled from biographical memory, not preference.
 MEAM - Musically Evoked Autobiographical Memory - LOL #Meme of this #MEAM
+- Read the thinking behind this [Medium link here]
 
 TruSic explores:
 **Can we play the song closest to what a person is feeling right now?*
@@ -89,6 +90,9 @@ This project is shaped by:
 - Deep Learning  — Goodfellow, Bengio, Courville
 - Hands-On Machine Learning — Aurélien Géron
 - Behave — Robert Sapolsky
+- Doug Eck (Google/DeepMind) — music + ML inspiration
+- Music + memory research (MEAM concepts)
+- Cornell low-power music recognition [(https://arxiv.org/abs/1711.10958)]
 - Attention Is All You Need — Google Research
 Used conceptually, not mathematically deep but just enough to build.
 (non-academia,. I was a mischevious last bencher)
