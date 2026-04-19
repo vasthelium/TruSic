@@ -2,6 +2,10 @@
 **"Less Skip More Play"**  Heart/ Core of TruSic
 "Play what you feel, not what you usually play"
 
+## 🧠 System Diagram
+
+![TruSic Architecture](https://syedzameer-ai-data.s3.us-east-1.amazonaws.com/TruSic.svg)
+
 ## IDEA 
 Most music systems optimize for:
 - history, genre, patterns across millions of users
@@ -14,11 +18,11 @@ We Sometimes:
 This project starts from a simple observation:
 Music is often recalled from biographical memory, not preference.
 MEAM - Musically Evoked Autobiographical Memory - LOL #Meme of this #MEAM
-- [Read the thinking behind this on Medium] (https://medium.com/@techiezameer.m/trusic-playing-what-you-feel-not-what-you-usually-play-436870da0cd4)
+- [Read the thinking behind this on Medium](https://medium.com/@techiezameer.m/trusic-playing-what-you-feel-not-what-you-usually-play-436870da0cd4)
 
 
 TruSic explores:
-**Can we play the song closest to what a person is feeling right now?*
+**Can we play the song closest to what a person is feeling right now?**
 This is approached through a lightweight AI-driven system combining embeddings, 
 behavioral signals, and state modeling.
 
@@ -63,7 +67,7 @@ What we are exploring:
 - Music recall from memory (not search)
 - State + trigger → association
 - Moving from TASTE-based systems → STATE-based systems
-- TASTE - STATE (Change it a bit lol, but deep)
+- TASTE → STATE (shift from preference to present moment)
 
 Open directions:
 - capturing triggers from real interactions (text, voice, passive signals)
@@ -96,11 +100,11 @@ This project is shaped by:
 - Cornell low-power music recognition [(https://arxiv.org/abs/1711.10958)]
 - Attention Is All You Need — Google Research
 Used conceptually, not mathematically deep but just enough to build.
-(non-academia,. I was a mischevious last bencher)
+(non-academic approach — learned by building, not theory-first)
 
 ## NOTE
 This is an evolving system.Some parts, especially learning logic, 
-Multi Layer Perceptropn are intentionally kept simple / abstract for now.
+Multi Layer Perceptron are intentionally kept simple / abstract for now.
 Focus is on: getting the idea working first, then refining it
 
 ## FUTURE ROADMAP
@@ -115,6 +119,9 @@ Focus is on: getting the idea working first, then refining it
 Closing Thought..
 Music feels right not because it matches taste, but because it matches a moment.
 ......TruSic is an attempt to explore that.
+
+## Status
+Experimental system — actively evolving.
 
 
 
