@@ -26,7 +26,7 @@ TruSic explores:
 This is approached through a lightweight AI-driven system combining embeddings, 
 behavioral signals, and state modeling.
 
-##  CORE DIRECTION
+## CORE DIRECTION
 Instead of "what do users like?" , we now ask “What is the user closest to right now?”
 
 Current Approach MVP :This is an EARLY STAGE - EXPERIMENTAL SYSTEM.
@@ -103,7 +103,7 @@ Used conceptually, not mathematically deep but just enough to build.
 (non-academic approach — learned by building, not theory-first)
 
 ## NOTE
-This is an evolving system.Some parts, especially learning logic, 
+This is an evolving system. Some parts, especially learning logic, 
 Multi Layer Perceptron are intentionally kept simple / abstract for now.
 Focus is on: getting the idea working first, then refining it
 
@@ -115,6 +115,18 @@ Focus is on: getting the idea working first, then refining it
 - improve embedding quality and trigger–state associations  
 - deepen integration of mental state into retrieval + learning  
 - build a simple interface for real-time interaction
+
+## TECHNICAL NOTES (ML/Learning)
+- Current learning loop uses MSE-based regression on simulated skip-duration buckets
+- Skip signals are synthetic (randomized) → used for early-stage pipeline validation
+- Model currently trains final layer (W3) → simplified learning setup for iteration speed
+
+**Planned improvements**
+- Full backpropagation across layers (W1, W2, W3)
+- Transition to classification (Cross-Entropy) for discrete skip behavior modeling
+- Learning rate scheduling and optimization
+- Replacement of synthetic signals with real user interaction data
+
 
 Closing Thought..
 Music feels right not because it matches taste, but because it matches a moment.
