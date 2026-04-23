@@ -5,6 +5,7 @@
 ## 🧠 System Diagram
 
 ![TruSic Architecture](https://syedzameer-ai-data.s3.us-east-1.amazonaws.com/TruSic.svg)
+Note: The audio recording / foreground capture pipeline shown in the diagram is not part of the current implementation scope. TruSic currently operates without real-time audio capture, focusing on state, triggers, and learning systems.
 
 ## IDEA 
 Most music systems optimize for:
@@ -34,7 +35,7 @@ Current flow:
 - User triggers are manually written (moments, thoughts, internal states)
 - Triggers are stored in a project-level data file (data/trusic_triggers.md)
 - Each trigger is associated with songs
-- Associated songs are captured manually recorded audio layer
+- Associated songs are currently curated / linked manually (no real-time audio capture)
 - Embeddings are generated and stored
 - Retrieval is done via vector similarity (pgvector)
 - Closest emotional associations are returned as suggestions
@@ -52,10 +53,15 @@ TruSic derives a baseline cognitive state (proxy) from wearable data.
 - Transforms it into a cognitive_state score
 - Injects this directly into the states pipeline
 
-Audio handling layer:
+Audio handling layer: 
 - audio files are currently manually placed
 - Multimodal AI pipeline audio loading, classification, movement
 - future direction → foreground recorder inside app
+UPDATE 04.22 - Scope refinement (focus on state + learning layer)
+Audio handling layer:
+- audio files are currently manually referenced / linked
+- used only for embedding alignment and experimentation
+- no active recording or foreground capture in current scope
 
 ## RESEARCH DIRECTION
 This is not just a recommendation system.
@@ -71,8 +77,6 @@ What we are exploring:
 
 Open directions:
 - capturing triggers from real interactions (text, voice, passive signals)
-- capturing audio inputs (hums / recordings) — currently manual, moving toward foreground 
-Audio recording Layer
 - combining mental state + trigger memory
 - understanding signals like skip, replay, and full play
 - evolving toward a simple but meaningful learning loop
@@ -109,7 +113,6 @@ Focus is on: getting the idea working first, then refining it
 
 ## FUTURE ROADMAP
 - move from manual → real trigger capture (UI / passive / voice)  
-- add audio recording (hums / voice) inside the app (currently manual file placement)  
 - refine learning loop using behavioral signals (skip / replay / duration)  
 - transition from simulated signals → real user interaction data  
 - improve embedding quality and trigger–state associations  
