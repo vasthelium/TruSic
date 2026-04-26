@@ -31,8 +31,8 @@ def newmlp():
         skips.append(y_skip)
     y = np.array(skips)
     
-    W3 = np.random.randn(512, 1)
-    b3 = np.zeros(1)
+    W3 = np.random.randn(512, 4)
+    b3 = np.zeros(4)
     v_W3 = np.zeros_like(W3)
     v_b3 = np.zeros_like(b3)
     m_W3 = np.zeros_like(W3)
@@ -48,16 +48,26 @@ def newmlp():
         Z2 = Z2 / (np.linalg.norm(Z2, axis=1, keepdims=True) + 1e-8)
 
         Z3 = np.dot(Z2, W3) + b3
-        y_pred = Z3.flatten()
-        error = y_pred - y
-        loss = np.mean(error ** 2) # can also be
+        exp_Z3 = np.exp(Z3 - np.max(Z3, axis=1, keepdims=True))
+        y_pred = exp_Z3 / np.sum(exp_Z3, axis=1, keepdims=True)
+        # print(y_pred.shape) - DEBUG LINE
+        correct_probs = y_pred[np.arange(X.shape[0]), y]
+        log_probs = np.log(correct_probs + 1e-8)
+
+        loss = -np.mean(log_probs)
+        #error = y_pred - y
+        #loss = np.mean(error ** 2) # can also be
                                        # sq_error = np.square(error)
                                        # loss = np.average(sq_error)
-        grad_W3 = np.dot(Z2.T, (2 * error / X.shape[0]).reshape(-1, 1))
-        #grad_b3 = np.sum(2 * error / X.shape[0])
-        grad_b3 = np.mean(2 * error) #more cleaner
+        y_one_hot = np.zeros((X.shape[0], 4))
+        y_one_hot[np.arange(X.shape[0]), y] = 1
+        error = y_pred - y_one_hot
+        grad_W3 = np.dot(Z2.T, error) / X.shape[0]
+        grad_b3 = np.mean(error, axis=0)
 
-        lr = 0.01
+        base_lr = 0.01
+        lr = base_lr * (0.95 ** i)
+
         m_W3 = beta_1 * m_W3 + (1 - beta_1) * grad_W3
         m_b3 = beta_1 * m_b3 + (1 - beta_1) * grad_b3
         v_W3 = beta_2 * v_W3 + (1 - beta_2) * (grad_W3 ** 2)
