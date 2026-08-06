@@ -5,13 +5,7 @@ torch
 torchaudio
 transformers
 huggingface_hub
-tensorflow
-tensorflow-hub
 pytest
 pytest-asyncio
-langchain
-langchain-openai
-langgraph
-deepagents
 fastapi
 scikit-learn
